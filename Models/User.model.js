@@ -40,7 +40,7 @@ const UserSchema = new Schema({
 // }
 
 
-//xu li du lieu truoc khi vao data base
+//xu li du lieu truoc khi vao data base phương thức save của schema
 
 UserSchema.pre('save', async function(next){
     try {

@@ -58,8 +58,6 @@ module.exports = {
         try {
 
             const { email, password } = req.body;
-            console.log("email:", email);
-            console.log("password:", password);
             const { error } = userValidate(req.body);
             if (error) {
                 throw createError(error.details[0].message)
@@ -69,14 +67,15 @@ module.exports = {
             if (!user) {
                 throw createError.NotFound('User not registered');
             }
+            console.log("user:",user);
             const isValid = await user.isCheckPassword(password);
             console.log("isValid:", isValid);
             if (!isValid) {
                 throw createError.Unauthorized();
             }
+            // đăng nhập thì trả về 2 giá trị này 
             const accessToken = await signAccessToken(user._id);
 
-            // 
             const refreshToken = await signRefreshToken(user._id);
 
 
@@ -101,6 +100,8 @@ module.exports = {
             const { userId } = await verifyRefreshToken(refreshToken);
             const accessToken = await signAccessToken(userId);
             // hien tai no dang dk lai refresh token voi code nay moi khi refresh
+            // hơi thừa khi phải cấp lại refresh token mới .. 
+
             const refToken = await signRefreshToken(userId);
 
             res.json({

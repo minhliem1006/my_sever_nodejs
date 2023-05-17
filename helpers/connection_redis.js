@@ -11,8 +11,8 @@ client.ping((err,pong)=>{
     }
 });
 
-client.on('error', function(){ 
-    console.info('Redis connected!');
+client.on('error', function(err){ 
+    console.info('Redis error!',err);
 })
 
 client.on('connect', function(){ 

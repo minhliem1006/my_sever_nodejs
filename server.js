@@ -19,8 +19,6 @@ const client = require('./helpers/connection_redis');
 
 //
 
-
-
 const PORT = process.env.PORT || 3001;
 app.get('/',(req,res,next)=>{
     res.send("Home page");
@@ -34,6 +32,7 @@ app.use('/user',UserRoute);
 
 
 
+//middware show error 
 app.use((req,res,next)=>{   
     // const error = new Error('Not Found');
     // error.status = 500;

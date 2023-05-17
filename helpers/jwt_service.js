@@ -20,10 +20,12 @@ const signAccessToken = async(userId) => {
     })
 }
 
+// nay middware
 const verifyAccessToken = (req,res,next)=>{
     if(!req.headers['authorization']){
         return next(createError.Unauthorized());
     }
+
     const authHeader = req.headers['authorization'];
     const bearerToken = authHeader.split(' ');
     const token = bearerToken[1];
@@ -64,7 +66,7 @@ const signRefreshToken = async(userId) => {
         })
     })
 }
-
+// ham check
 const verifyRefreshToken = async(refreshToken) => {
     return new Promise((resolve,reject)=>{
         JWT.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET,(err,payload)=>{
